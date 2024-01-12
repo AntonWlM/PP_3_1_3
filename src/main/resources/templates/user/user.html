@@ -9,26 +9,20 @@
 <table border="5">
     <tbody>
     <tr>
-
         <td>Name</td>
         <td>Lastname</td>
         <td>Age</td>
-
     </tr>
     </tbody>
-
-
     <tr th:each="user : ${user}">
-
         <td th:text="${user.getName()}"></td>
         <td th:text="${user.getLastname()}"></td>
         <td th:text="${user.getAge()}"></td>
->
     </tr>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
 </table>
 
-<a href="/logout">LOGOUT</a>
+<a href="/logout">EXIT</a>
 </body>
 </html>

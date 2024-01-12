@@ -12,12 +12,13 @@ public interface UserService {
     User findUserByUsername(String username);
 
     UserDetails loadUserByUsername(String username);
-    void save(User user);
 
-    List<User> list();
+    void saveUser(User user);
 
-    User find(Long id);
+    List<User> getListUsers();
 
-    void delete(Long id);
+    User findUser(Long id);
+
+    void deleteUser(Long id);
 
 }

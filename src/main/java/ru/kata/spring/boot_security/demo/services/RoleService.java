@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.services;
 
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.repositoties.RoleRepository;
@@ -14,6 +13,15 @@ public class RoleService {
         this.roleRepository = roleRepository;
     }
 
-    @Query("select u from User u left join fetch u.roles where u.name=:name")
-    public List<Role> listRoles() {return roleRepository.findAll();}
+    public List<Role> getListRoles() {
+        return roleRepository.findAll();
+    }
+
+    public Role findRoleByName(String name) {
+        return roleRepository.findRoleByName(name);
+    }
+
+    public void saveRole(Role role) {
+        roleRepository.save(role);
+    }
 }

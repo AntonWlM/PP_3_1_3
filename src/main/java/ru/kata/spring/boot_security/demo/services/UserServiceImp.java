@@ -29,15 +29,16 @@ public class UserServiceImp implements UserService, UserDetailsService {
         return userRepository.findUserByUsername(username);
     }
 
-    public List<User> list() {
+    public List<User> getListUsers() {
         return userRepository.findAll();
     }
 
-    public User find(Long id) {
+    public User findUser(Long id) {
         return userRepository.getById(id);
     }
-    public void save(User user) {
-        if (!user.getName().isBlank() && !user.getLastname().isBlank()) {
+
+    public void saveUser(User user) {
+        if (!user.getName().isBlank() && !user.getLastname().isBlank() && !user.getUsername().isBlank() &&!user.getPassword().isBlank()) {
             if (findUserByUsername(user.getUsername())==null){
                     userRepository.save(user);}}
     }
@@ -51,8 +52,8 @@ public class UserServiceImp implements UserService, UserDetailsService {
                 user.getAuthorities());
     }
 
-        public void delete(Long id) {
-        userRepository.delete(find(id));
+    public void deleteUser(Long id) {
+        userRepository.delete(findUser(id));
     }
 }
 

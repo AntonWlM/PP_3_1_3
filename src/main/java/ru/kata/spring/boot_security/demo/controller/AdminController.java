@@ -5,12 +5,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.kata.spring.boot_security.demo.models.User;
 import ru.kata.spring.boot_security.demo.services.RoleService;
 import ru.kata.spring.boot_security.demo.services.UserService;
 import ru.kata.spring.boot_security.demo.services.UserServiceImp;
-import ru.kata.spring.boot_security.demo.models.User;
-
-import java.security.Principal;
 
 @Controller
 @RequestMapping(value = "/admin/")
@@ -27,48 +25,43 @@ public class AdminController {
     }
 
     @GetMapping
-    public String list(Model model) {
-        model.addAttribute("list", userService.list());
+    public String getListUsers(Model model) {
+        model.addAttribute("list", userService.getListUsers());
         return "admin/list";
-    }
-
-    @GetMapping(value = "/new")
-    public String newUser(@ModelAttribute("user") User user, Model model) {
-        model.addAttribute("roles", roleService.listRoles());
-        return "admin/new_user";
-    }
-
-    @PostMapping(value = "/save")
-    public String saveUser(@ModelAttribute("user") User user){
-        String encodedPassword = new BCryptPasswordEncoder(12).encode(user.getPassword());
-        user.setPassword(encodedPassword);
-        userService.save(user);
-        return "redirect:/admin/";
     }
 
     @GetMapping(value = "/edit")
     public String editUser(@RequestParam(value = "id") Long id,
                            Model model) {
-        model.addAttribute("roles", roleService.listRoles());
-        model.addAttribute("user", userService.find(id));
+        model.addAttribute("roles", roleService.getListRoles());
+        model.addAttribute("user", userService.findUser(id));
         return "admin/edit";
     }
 
     @PostMapping(value = "/update")
     public String updateUser(@ModelAttribute("user") User user){
-        userService.save(user);
+        userService.saveUser(user);
         return "redirect:/admin/";
     }
 
     @GetMapping(value = "/delete")
     public String deleteUser(@RequestParam("id") Long id) {
-        userService.delete(id);
+        userService.deleteUser(id);
         return "redirect:/admin/";
     }
-    @GetMapping(value = "/user")
-    public String user(Model model, Principal principal) {
-        model.addAttribute("user", userService.findUserByUsername(principal.getName()));
-        return "user/user";
+
+    @GetMapping(value = "/new")
+    public String newUser(@ModelAttribute("user") User user, Model model) {
+        model.addAttribute("roles", roleService.getListRoles());
+        return "admin/new_user";
+    }
+
+    @PostMapping(value = "/save")
+    public String saveUser(@ModelAttribute("user") User user) {
+        String encodedPassword = new BCryptPasswordEncoder(12).encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        userService.saveUser(user);
+        return "redirect:/admin/";
     }
 }
 

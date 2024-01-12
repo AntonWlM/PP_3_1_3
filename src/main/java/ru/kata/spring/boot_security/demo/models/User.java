@@ -6,7 +6,6 @@ import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -28,13 +27,14 @@ public class User implements UserDetails {
 
     @NotNull
     private String username;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @ManyToMany(fetch = FetchType.LAZY)
     @LazyCollection(LazyCollectionOption.EXTRA)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
-    public User(String name, String lastname, int age, String password, String username, PasswordEncoder passwordEncoder, Set<Role> roles) {
+
+    public User(int age, String lastname, String name, String password, String username, Set<Role> roles) {
         this.name = name;
         this.lastname = lastname;
         this.age = age;
