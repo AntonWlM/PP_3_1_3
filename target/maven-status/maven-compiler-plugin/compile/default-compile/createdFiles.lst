@@ -1,0 +1,13 @@
+ru\kata\spring\boot_security\demo\controller\UserController.class
+ru\kata\spring\boot_security\demo\configs\SuccessUserHandler.class
+ru\kata\spring\boot_security\demo\services\UserService.class
+ru\kata\spring\boot_security\demo\configs\WebSecurityConfig.class
+ru\kata\spring\boot_security\demo\configs\MvcConfig.class
+ru\kata\spring\boot_security\demo\services\UserServiceImp.class
+ru\kata\spring\boot_security\demo\SpringBootSecurityDemoApplication.class
+ru\kata\spring\boot_security\demo\models\Role.class
+ru\kata\spring\boot_security\demo\services\RoleService.class
+ru\kata\spring\boot_security\demo\models\User.class
+ru\kata\spring\boot_security\demo\repositoties\RoleRepository.class
+ru\kata\spring\boot_security\demo\controller\AdminController.class
+ru\kata\spring\boot_security\demo\repositoties\UserRepository.class
