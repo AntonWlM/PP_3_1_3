@@ -28,13 +28,10 @@ public class User implements UserDetails {
     @NotNull
     private String username;
     @ManyToMany(fetch = FetchType.LAZY)
-    @LazyCollection(LazyCollectionOption.EXTRA)
-    @JoinTable(name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    public User(int age, String lastname, String name, String password, String username, Set<Role> roles) {
+    public User(Long id, int age, String lastname, String name, String password, String username, Set<Role> roles) {
+        this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.age = age;
