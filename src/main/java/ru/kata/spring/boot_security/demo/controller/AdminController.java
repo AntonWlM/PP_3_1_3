@@ -39,8 +39,8 @@ public class AdminController {
     }
 
     @PostMapping(value = "/update")
-    public String updateUser(@ModelAttribute("user") User user){
-        userService.saveUser(user);
+    public String updateUser(@RequestParam(value = "id") Long id, User user) {
+        userService.updateUser(user,id);
         return "redirect:/admin/";
     }
 
@@ -59,7 +59,8 @@ public class AdminController {
     @PostMapping(value = "/save")
     public String saveUser(@ModelAttribute("user") User user) {
         String encodedPassword = new BCryptPasswordEncoder(12).encode(user.getPassword());
-        user.setPassword(encodedPassword);
+        if (!user.getPassword().isBlank()) {
+                user.setPassword(encodedPassword);}
         userService.saveUser(user);
         return "redirect:/admin/";
     }
