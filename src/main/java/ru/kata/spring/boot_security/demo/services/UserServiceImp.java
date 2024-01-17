@@ -52,6 +52,7 @@ public class UserServiceImp implements UserService, UserDetailsService {
         if (!user.getName().isBlank() && !user.getLastname().isBlank() && !user.getUsername().isBlank() && user.getAge() != 0) {
             if (user.getPassword().isBlank()) {
                 user.setPassword(updateUser.getPassword());
+                userRepository.save(user);
             } else {
                 String encodedPassword = new BCryptPasswordEncoder(12).encode(user.getPassword());
                 user.setPassword(encodedPassword);
